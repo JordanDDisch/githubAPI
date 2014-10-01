@@ -3,27 +3,34 @@
 <head>
     <title></title>
 </head>
-<script src="node_modules/github-api/github.js"></script>
+<script src="github/github.js"></script>
 <script>
     var github = new Github({
         token: "b6a1fa2df1cd013e56763c50d07fe854c0b47ca3",
         auth: "oauth"
     });
 
-    var repo = github.getRepo('jordanddisch', 's');
+    var repo = github.getRepo('jordanddisch', 'githubAPI');
 
-
-    var user = github.getUser();
-
-    myRepos = {}
-
-    user.repos(function(err, repos) {
-        console.log(repos);
-        var div = document.getElementById('gitobjects');
-        div.innerHTML = div.innerHTML + repos[0].archive_url;
+    repo.show(function(err, repo) {
+        console.log(repo);
     });
 
-    repo.write('master', 'path/to/file', 'YOUR_NEW_CONTENTS', 'YOUR_COMMIT_MESSAGE', function(err) {});
+    repo.write('master', 'index.html', 'asdf', 'commit with js', function(err) {
+        console.log(err);
+    });
+
+    //var user = github.getUser();
+
+
+    //myRepos = {}
+
+    //user.repos(function(err, repos) {
+    //    console.log(repos);
+    //    var div = document.getElementById('gitobjects');
+    //    div.innerHTML = div.innerHTML + repos[0].archive_url;
+    //});
+
 
 
 </script>
