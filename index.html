@@ -3,7 +3,10 @@
 <head>
     <title></title>
 </head>
+<script src="github/lib/base64.js"></script>
+<script src="github/lib/underscore-min.js"></script>
 <script src="github/github.js"></script>
+
 <script>
     var github = new Github({
         token: "b6a1fa2df1cd013e56763c50d07fe854c0b47ca3",
@@ -12,13 +15,14 @@
 
     var repo = github.getRepo('jordanddisch', 'githubAPI');
 
-    repo.show(function(err, repo) {
-        console.log(repo);
+    repo.read('markdownfiles', 'test.md', function(err, data) {
+        var div = document.getElementById('gitobjects');
+        div.innerHTML = div.innerHTML + data;
     });
 
-    repo.write('markdownfiles', 'test.md', 'Hello world', 'commit with js', function(err) {
-        console.log(err);
-    });
+    //repo.write('markdownfiles', 'test.md', data + text, 'YOUR_COMMIT_MESSAGE', function(err) {});
+
+
 
     //var user = github.getUser();
 
@@ -35,6 +39,21 @@
 
 </script>
 <body>
+
+<form>
+    <input id="textapi" name="enter" class="enter" value="" type="text"/>
+    <input type="button" value="click" onclick="getValue();"/>
+    <script>
+        
+        var inputValue = document.getElementById('textapi');
+
+        function getValue() {
+            repo.write('markdownfiles', 'test.md', inputValue.value, 'YOUR_COMMIT_MESSAGE', function(err) {});
+        }
+
+    </script>
+</form>
+
 <div id="gitobjects">
 </div>
 </body>
