@@ -1,1 +1,44 @@
-asdf
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<script src="github/github.js"></script>
+<body>
+
+<form>
+    <input id="authenticate" name="enter" class="enter" value="" type="text"/>
+    <br>
+    <input id="textapi" name="enter" class="enter" value="" type="text"/>
+    <input type="button" value="click" onclick="getValue();"/>
+    <script>
+
+        function getValue() {
+
+            var authToken = document.getElementById("authenticate").value;
+
+            var github = new Github({
+                token: authToken,
+                auth: "oauth"
+            });
+
+            var repo = github.getRepo('jordanddisch', 'githubAPI');
+
+            var inputValue = document.getElementById('textapi');
+
+            var commitValue = inputValue.value;
+
+            repo.write('markdownfiles', 'test.md', commitValue, 'test', function(data, err) {
+                console.log(data);
+                console.log(err);
+            });
+        }
+
+    </script>
+</form>
+
+</body>
+<script>
+
+</script>
+</html>
