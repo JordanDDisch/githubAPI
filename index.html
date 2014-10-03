@@ -8,7 +8,6 @@
 
 <form>
     <input id="authenticate" name="enter" class="enter" value="" type="text"/>
-    <input type="button" value="authenticate" />
     <br>
     <input id="textapi" name="enter" class="enter" value="" type="text"/>
     <input type="button" value="click" onclick="getValue();"/>
@@ -16,8 +15,10 @@
 
         function getValue() {
 
+            var authToken = document.getElementById("authenticate").value;
+
             var github = new Github({
-                token: "b6a1fa2df1cd013e56763c50d07fe854c0b47ca3",
+                token: authToken,
                 auth: "oauth"
             });
 
